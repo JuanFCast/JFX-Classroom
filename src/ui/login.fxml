@@ -16,7 +16,7 @@
    <children>
       <Label text="Sing in to Clasroom">
          <font>
-            <Font name="System Bold" size="24.0" />
+            <Font name="System Bold" size="25.0" />
          </font>
          <textFill>
             <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
@@ -60,7 +60,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button mnemonicParsing="false" onAction="#logIn" style="-fx-background-color: #139D4E;" text="Log In" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#logIn" prefHeight="44.0" prefWidth="101.0" style="-fx-background-color: #139D4E;" text="Log In" textFill="WHITE">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
