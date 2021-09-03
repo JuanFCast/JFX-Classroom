@@ -118,9 +118,8 @@ public class ClassroomGUI {
 		
 	}
     
-	public void initializeComboBox() {
-		ObservableList<String> options = 
-				FXCollections.observableArrayList("Google Chrome","Mozilla Firefox","Opera GX", "Safari");
+	public void initializeComBox() {
+		ObservableList<String> options = FXCollections.observableArrayList("Google Chrome","Mozilla Firefox","Opera GX", "Safari", "Microsoft Edge");
 		browser.setValue("Choose an option");
 		browser.setItems(options);
 	}
@@ -149,7 +148,7 @@ public class ClassroomGUI {
 			Image image = new Image(file.toURI().toString());
 			ImageView imageView=new ImageView(image);
 			imageView.setFitHeight(100);
-			imageView.setFitWidth(100);
+			imageView.setFitWidth(150);
 			labUserName.setGraphic(imageView);
 			labUserName.setContentDisplay(ContentDisplay.RIGHT);
 			initializeTableView();
@@ -167,7 +166,7 @@ public class ClassroomGUI {
     	passwordField.clear();
     }
     
-    private void initializeTableView() {
+    public void initializeTableView() {
     	ObservableList<UserAccount> list= FXCollections.observableArrayList(classroom.getAccounts());
     	
     	tableAccList.setItems(list);
@@ -192,7 +191,7 @@ public class ClassroomGUI {
 		mainPane.getChildren().clear();
 		mainPane.setCenter(register);
 		
-		initializeComboBox();
+		initializeComBox();
 	}
 
     
@@ -202,7 +201,7 @@ public class ClassroomGUI {
     
     //register
     @FXML
-    void createAccount(ActionEvent event) {
+    public void createAccount(ActionEvent event) {
     	String gend="";
 		if(rbFemale.isSelected()) {
 			gend="Female";
