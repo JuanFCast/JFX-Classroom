@@ -26,6 +26,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
 import model.Classroom;
 import model.UserAccount;
 
@@ -88,7 +89,7 @@ public class ClassroomGUI {
     //account-list
     @FXML
     private Label labUserName;
-
+    
     @FXML
     private TableView<UserAccount> tableAccList;
 
@@ -107,8 +108,7 @@ public class ClassroomGUI {
     @FXML
     private TableColumn<UserAccount, String> colBrowser;
     
-    @FXML
-    private Label labUserName1;
+    
 	
 	private Classroom classroom;
 	
@@ -119,7 +119,8 @@ public class ClassroomGUI {
 	}
     
 	public void initializeComboBox() {
-		ObservableList<String> options = FXCollections.observableArrayList("Google Chrome","Mozilla Firefox","Opera", "Safari");
+		ObservableList<String> options = 
+				FXCollections.observableArrayList("Google Chrome","Mozilla Firefox","Opera GX", "Safari");
 		browser.setValue("Choose an option");
 		browser.setItems(options);
 	}
@@ -129,9 +130,9 @@ public class ClassroomGUI {
     public void logIn(ActionEvent event) throws IOException {
     	if(txtUserName.getText().equals("") && passwordField.getText().equals("")) {
 			Alert alert = new Alert(AlertType.ERROR);
-    		alert.setTitle("Validation error");
+    		alert.setTitle("Validacion de error");
     		alert.setHeaderText(null);
-    		alert.setContentText("You must fill each field in the form ");
+    		alert.setContentText("Diligencie por favos los campos del usuario y contraseña ;3");
 
     		alert.showAndWait();
 		}
@@ -147,17 +148,17 @@ public class ClassroomGUI {
 			File file= new File(classroom.profilePhotoResource(txtUserName.getText(), passwordField.getText()));
 			Image image = new Image(file.toURI().toString());
 			ImageView imageView=new ImageView(image);
-			imageView.setFitHeight(50);
-			imageView.setFitWidth(50);
+			imageView.setFitHeight(100);
+			imageView.setFitWidth(100);
 			labUserName.setGraphic(imageView);
 			labUserName.setContentDisplay(ContentDisplay.RIGHT);
 			initializeTableView();
 		}
 		else {
 			Alert alert = new Alert(AlertType.ERROR);
-    		alert.setTitle("Log in incorrect");
+    		alert.setTitle("Acceso denegado");
     		alert.setHeaderText(null);
-    		alert.setContentText("The username and password given are incorrect ");
+    		alert.setContentText("El nombre de usuario y la contraseña proporcionados son incorrectos ");
 
     		alert.showAndWait();
 		}
@@ -179,18 +180,7 @@ public class ClassroomGUI {
     	
 	}
     
-    @FXML
-	public void loadRegister1(ActionEvent event) throws IOException {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("register.fxml"));
-	
-		fxmlLoader.setController(this);
-		Parent register= fxmlLoader.load();
-		mainPane.getChildren().clear();
-		mainPane.setCenter(register);
-		
-		initializeComboBox();
-	}
-	
+    
 	
 	
     @FXML
@@ -213,6 +203,63 @@ public class ClassroomGUI {
     //register
     @FXML
     void createAccount(ActionEvent event) {
+    	String gend="";
+		if(rbFemale.isSelected()) {
+			gend="Female";
+		}
+		else if(rbMale.isSelected()) {
+			gend="Male";
+		}
+		else if(rbOther.isSelected()) {
+			gend="Other";
+		}
+		
+		String career="";
+		if(software.isSelected()) {
+			career+="Software engineering\n";
+		}
+		if(telematic.isSelected()) {
+			career+="Telematic engineering\n";
+		}
+		if(industrial.isSelected()) {
+			career+="Industrial engineering\n";
+		}
+		
+    	
+    	if(!txtUserName.getText().equals("") && !passwordField.getText().equals("") && !txtProfilePhoto.getText().equals("") && birthday.getValue()!=null && !browser.getSelectionModel().getSelectedItem().equals("Choose an option")&& !gend.equals("") && !career.equals("") ){
+	    	
+    		
+    		
+    		classroom.createAccount(txtUserName.getText(), passwordField.getText(),txtProfilePhoto.getText(),gend, career,birthday.getValue(), browser.getSelectionModel().getSelectedItem());
+    		
+    		Alert alert = new Alert(AlertType.INFORMATION);
+    		alert.setTitle("Cuenta creada");
+    		alert.setHeaderText(null);
+    		alert.setContentText("Se ha creado una nueva cuenta!" + "\n" + "Bienvenido " + txtUserName.getText() + "!");
+
+    		alert.showAndWait();
+    		
+    		txtUserName.clear();
+        	passwordField.clear();
+        	txtProfilePhoto.clear();
+        	birthday.setValue(null);
+        	browser.setValue("Choose an option");
+        	
+        	software.setSelected(false);
+        	telematic.setSelected(false);
+        	industrial.setSelected(false);
+        	if(!gend.equals("")) {
+        		gender.getSelectedToggle().setSelected(false);
+        	}
+        	
+    	}else {
+    		Alert alert = new Alert(AlertType.ERROR);
+    		alert.setTitle("Acceso denegado");
+    		alert.setHeaderText(null);
+    		alert.setContentText("Debes completar cada campo en el formulario");
+
+    		alert.showAndWait();
+    	}
 
     }
 
@@ -220,8 +267,16 @@ public class ClassroomGUI {
 
     //register
     @FXML
-    void selectBrowse(ActionEvent event) {
-
+    public void selectBrowse(ActionEvent event) {
+    	FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png");
+    	FileChooser fileChooser= new FileChooser();
+    	fileChooser.getExtensionFilters().add(imageFilter);
+    	fileChooser.setTitle("Select profile photo");
+    	File file= fileChooser.showOpenDialog(null);
+    	
+    	if(file != null) {
+    		txtProfilePhoto.setText(file.getAbsolutePath());
+    	}
     }
     
     

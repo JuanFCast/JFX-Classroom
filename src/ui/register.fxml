@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
@@ -38,12 +39,7 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="txtFUsername" layoutX="300.0" layoutY="98.0" prefHeight="31.0" prefWidth="229.0">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="txtFUsername1" layoutX="300.0" layoutY="137.0" prefHeight="31.0" prefWidth="229.0">
+      <TextField fx:id="txtUserName" layoutX="300.0" layoutY="98.0" prefHeight="31.0" prefWidth="229.0">
          <font>
             <Font size="15.0" />
          </font>
@@ -70,16 +66,8 @@
             <ToggleGroup fx:id="gender" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="rbMale" layoutX="385.0" layoutY="221.0" mnemonicParsing="false" text="Male">
-         <toggleGroup>
-            <ToggleGroup fx:id="gender1" />
-         </toggleGroup>
-      </RadioButton>
-      <RadioButton fx:id="rbOther" layoutX="464.0" layoutY="221.0" mnemonicParsing="false" text="Other">
-         <toggleGroup>
-            <ToggleGroup fx:id="gender2" />
-         </toggleGroup>
-      </RadioButton>
+      <RadioButton fx:id="rbMale" layoutX="385.0" layoutY="221.0" mnemonicParsing="false" text="Male" toggleGroup="$gender" />
+      <RadioButton fx:id="rbOther" layoutX="464.0" layoutY="221.0" mnemonicParsing="false" text="Other" toggleGroup="$gender" />
       <Label layoutX="185.0" layoutY="251.0" text="Career: ">
          <font>
             <Font name="System Bold" size="20.0" />
@@ -110,5 +98,6 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Button>
+      <PasswordField fx:id="passwordField" layoutX="301.0" layoutY="138.0" />
    </children>
 </Pane>
