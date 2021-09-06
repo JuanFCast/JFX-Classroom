@@ -49,7 +49,7 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#loadRegister" style="-fx-background-color: #139D4E;" text="Sign Up" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#loadRegister" style="-fx-background-color: #0CD47E;" text="Sign Up" textFill="WHITE">
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>
@@ -60,7 +60,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button mnemonicParsing="false" onAction="#logIn" prefHeight="44.0" prefWidth="101.0" style="-fx-background-color: #139D4E;" text="Log In" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#logIn" prefHeight="44.0" prefWidth="101.0" style="-fx-background-color: #0CD47E;" text="Log In" textFill="WHITE">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
